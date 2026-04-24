@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Motorisation Portail & Garage 63 | Estimation en 1 min</title>
+    <title>Motorisation Portail & Garage 63 | Estimation Express</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         .step-hidden { display: none; }
         .bg-63 { background-color: #1e3a8a; }
         .text-63 { color: #1e3a8a; }
+        .border-63 { border-color: #1e3a8a; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans">
@@ -26,78 +27,89 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="relative py-16 lg:py-24 overflow-hidden">
+    <section class="relative py-12 lg:py-20 overflow-hidden">
         <div class="container mx-auto px-4">
             <div class="max-w-3xl">
-                <span class="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-63 uppercase bg-blue-100 rounded-full">Service Local : Puy-de-Dôme (63)</span>
+                <span class="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-63 uppercase bg-blue-100 rounded-full">Exclusivité Puy-de-Dôme (63)</span>
                 <h1 class="text-4xl lg:text-6xl font-extrabold mb-6 leading-tight">
-                    Ne descendez plus de voiture sous la pluie.
+                    Votre accès automatisé, sans effort.
                 </h1>
                 <p class="text-xl text-gray-600 mb-8 leading-relaxed">
-                    Automatisez votre portail ou votre garage en un clic. Recevez une estimation immédiate et connectez-vous avec les meilleurs experts locaux du 63.
+                    Ne sortez plus de votre véhicule. Obtenez une estimation précise pour la motorisation de votre portail ou garage et recevez l'offre d'un expert local certifié.
                 </p>
                 <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                    <a href="#simulator" class="bg-63 text-white text-center px-8 py-4 rounded-xl text-lg font-bold hover:shadow-lg transition transform hover:-translate-y-1">Calculer mon prix</a>
-                    <div class="flex items-center space-x-2 text-gray-500 justify-center sm:justify-start">
-                        <i class="fas fa-check-circle text-green-500"></i>
-                        <span>Réponse en moins de 24h</span>
-                    </div>
+                    <a href="#simulator" class="bg-63 text-white text-center px-8 py-4 rounded-xl text-lg font-bold hover:shadow-lg transition transform hover:-translate-y-1">Lancer le simulateur</a>
                 </div>
             </div>
         </div>
-        <div class="hidden lg:block absolute top-0 right-0 w-1/3 h-full bg-blue-50 -z-10 rounded-l-full transform translate-x-20"></div>
+        <div class="hidden lg:block absolute top-0 right-0 w-1/4 h-full bg-blue-50 -z-10 rounded-l-full transform translate-x-20"></div>
     </section>
 
     <!-- Simulator Section -->
-    <section id="simulator" class="py-16 bg-white">
+    <section id="simulator" class="py-12 bg-white">
         <div class="container mx-auto px-4">
             <div class="max-w-2xl mx-auto bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden">
                 <div class="bg-63 p-6 text-white text-center">
-                    <h2 class="text-2xl font-bold">Simulateur de motorisation</h2>
-                    <p class="opacity-80">Obtenez votre estimation en 3 étapes</p>
+                    <h2 class="text-2xl font-bold">Simulateur intelligent</h2>
+                    <p class="opacity-80">Qualification de votre projet en 63</p>
                 </div>
 
-                <div class="p-8">
-                    <!-- Step 1 -->
+                <div class="p-6">
+                    <!-- Step 1: Type & Situation -->
                     <div id="step-1" class="step">
-                        <h3 class="text-xl font-bold mb-6 text-center">Quel accès souhaitez-vous automatiser ?</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <button onclick="nextStep(2, 'portail')" class="p-6 border-2 border-gray-100 rounded-2xl hover:border-63 hover:bg-blue-50 transition group">
+                        <h3 class="text-xl font-bold mb-6 text-center">Quel est votre projet ?</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                            <button onclick="setSelection('type', 'portail', 2)" class="p-6 border-2 border-gray-100 rounded-2xl hover:border-63 hover:bg-blue-50 transition group">
                                 <i class="fas fa-gate text-3xl mb-3 text-gray-400 group-hover:text-63"></i>
-                                <span class="block font-bold">Un Portail</span>
+                                <span class="block font-bold">Portail</span>
                             </button>
-                            <button onclick="nextStep(2, 'garage')" class="p-6 border-2 border-gray-100 rounded-2xl hover:border-63 hover:bg-blue-50 transition group">
+                            <button onclick="setSelection('type', 'garage', 2)" class="p-6 border-2 border-gray-100 rounded-2xl hover:border-63 hover:bg-blue-50 transition group">
                                 <i class="fas fa-warehouse text-3xl mb-3 text-gray-400 group-hover:text-63"></i>
                                 <span class="block font-bold">Une Porte de Garage</span>
                             </button>
                         </div>
+                        <h4 class="font-semibold mb-3">Situation actuelle :</h4>
+                        <div class="flex space-x-4">
+                            <label class="flex-1 p-3 border rounded-xl text-center cursor-pointer hover:bg-gray-50">
+                                <input type="radio" name="situation" value="existant" checked class="hidden peer">
+                                <span onclick="selections.situation='existant'" class="peer-checked:text-63 peer-checked:font-bold">Motoriser l'existant</span>
+                            </label>
+                            <label class="flex-1 p-3 border rounded-xl text-center cursor-pointer hover:bg-gray-50">
+                                <input type="radio" name="situation" value="neuf" class="hidden peer">
+                                <span onclick="selections.situation='neuf'" class="peer-checked:text-63 peer-checked:font-bold">Installation neuve</span>
+                            </label>
+                        </div>
                     </div>
 
-                    <!-- Step 2 -->
+                    <!-- Step 2: Dimensions & Mechanism -->
                     <div id="step-2" class="step step-hidden">
-                        <h3 class="text-xl font-bold mb-6 text-center">Type de mécanisme</h3>
-                        <div id="mechanism-options" class="grid grid-cols-1 gap-4">
-                            <!-- Dynamic options based on Step 1 -->
+                        <h3 class="text-xl font-bold mb-6 text-center">Dimensions et Mécanisme</h3>
+                        <div id="mechanism-options" class="grid grid-cols-1 gap-4 mb-6"></div>
+                        
+                        <div class="mb-6">
+                            <label class="block text-sm font-semibold mb-2">Largeur approximative (en mètres)</label>
+                            <input type="number" id="dimension_input" placeholder="Ex: 3.5" step="0.1" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg outline-none focus:ring-2 focus:ring-63">
                         </div>
-                        <button onclick="prevStep(1)" class="mt-6 text-gray-400 hover:text-63 flex items-center justify-center space-x-2 w-full">
+
+                        <button onclick="prevStep(1)" class="text-gray-400 hover:text-63 flex items-center justify-center space-x-2 w-full">
                             <i class="fas fa-arrow-left"></i> <span>Retour</span>
                         </button>
                     </div>
 
-                    <!-- Step 3 -->
+                    <!-- Step 3: Options -->
                     <div id="step-3" class="step step-hidden">
-                        <h3 class="text-xl font-bold mb-6 text-center">Options de confort</h3>
+                        <h3 class="text-xl font-bold mb-6 text-center">Niveau de confort</h3>
                         <div class="grid grid-cols-1 gap-4">
                             <button onclick="calculateResult('standard')" class="p-4 border border-gray-200 rounded-xl hover:bg-gray-50 flex items-center justify-between">
                                 <span>Standard (Télécommande)</span>
                                 <i class="fas fa-chevron-right text-gray-300"></i>
                             </button>
                             <button onclick="calculateResult('connected')" class="p-4 border border-gray-200 rounded-xl hover:bg-gray-50 flex items-center justify-between">
-                                <span>Connecté (Smartphone / IA)</span>
+                                <span>Connecté (Smartphone / Domotique)</span>
                                 <i class="fas fa-chevron-right text-gray-300"></i>
                             </button>
                             <button onclick="calculateResult('solar')" class="p-4 border border-gray-200 rounded-xl hover:bg-gray-50 flex items-center justify-between">
-                                <span>Solaire (Sans travaux électriques)</span>
+                                <span>Autonome Solaire (Eco)</span>
                                 <i class="fas fa-chevron-right text-gray-300"></i>
                             </button>
                         </div>
@@ -106,40 +118,36 @@
                         </button>
                     </div>
 
-                    <!-- Result & Lead Capture -->
+                    <!-- Result & Detailed Form -->
                     <div id="step-result" class="step step-hidden">
                         <div class="text-center mb-8">
-                            <div class="inline-block p-4 bg-green-100 text-green-700 rounded-full mb-4">
-                                <i class="fas fa-calculator text-2xl"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold mb-2">Estimation calculée !</h3>
+                            <h3 class="text-2xl font-bold mb-2">Votre estimation*</h3>
                             <div class="text-4xl font-extrabold text-63 mb-2">
                                 <span id="price-range">...</span> €
                             </div>
-                            <p class="text-gray-500">TTC matériel + pose incluse</p>
+                            <p class="text-[11px] text-gray-400">*Montant estimé à titre indicatif et non contractuel.</p>
                         </div>
 
                         <form id="lead-form" class="space-y-4">
-                            <div>
-                                <label class="block text-sm font-semibold mb-1">Prénom</label>
-                                <input type="text" id="first_name" required class="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-63 focus:border-transparent outline-none">
+                            <div class="grid grid-cols-2 gap-4">
+                                <input type="text" id="last_name" placeholder="Nom" required class="p-3 bg-gray-50 border border-gray-200 rounded-lg outline-none focus:ring-2 focus:ring-63">
+                                <input type="text" id="first_name" placeholder="Prénom" required class="p-3 bg-gray-50 border border-gray-200 rounded-lg outline-none focus:ring-2 focus:ring-63">
                             </div>
-                            <div>
-                                <label class="block text-sm font-semibold mb-1">Téléphone (pour l'artisan)</label>
-                                <input type="tel" id="phone" required class="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-63 focus:border-transparent outline-none">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-semibold mb-1">Délai souhaité</label>
-                                <select id="timeline" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-63 focus:border-transparent outline-none">
-                                    <option>ASAP (Urgent)</option>
-                                    <option>Moins d'un mois</option>
-                                    <option>D'ici 3 mois</option>
+                            <input type="tel" id="phone" placeholder="Téléphone (mobile recommandé)" required class="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg outline-none focus:ring-2 focus:ring-63">
+                            <input type="email" id="email" placeholder="Email" required class="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg outline-none focus:ring-2 focus:ring-63">
+                            
+                            <div class="grid grid-cols-2 gap-4">
+                                <input type="text" id="zip_code" placeholder="Code Postal (ex: 63000)" required pattern="[0-9]{5}" class="p-3 bg-gray-50 border border-gray-200 rounded-lg outline-none focus:ring-2 focus:ring-63">
+                                <select id="timeline" class="p-3 bg-gray-50 border border-gray-200 rounded-lg outline-none focus:ring-2 focus:ring-63">
+                                    <option value="urgent">Dès que possible</option>
+                                    <option value="1_month">Sous 1 mois</option>
+                                    <option value="3_months">D'ici 3 mois</option>
                                 </select>
                             </div>
-                            <button type="submit" class="w-full bg-63 text-white py-4 rounded-xl font-bold text-lg hover:bg-blue-800 shadow-lg transition">Envoyer ma demande</button>
-                            <p class="text-[10px] text-center text-gray-400 px-4 mt-4">
-                                En validant, vous acceptez d'être recontacté exclusivement par un artisan sélectionné pour votre projet. Pas de spam, un seul appel.
-                            </p>
+                            
+                            <textarea id="notes" placeholder="Précisez votre besoin (ex: marque actuelle, contraintes particulières...)" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg h-24 outline-none focus:ring-2 focus:ring-63"></textarea>
+
+                            <button type="submit" class="w-full bg-63 text-white py-4 rounded-xl font-bold text-lg hover:bg-blue-800 shadow-lg transition">Demander mon étude gratuite</button>
                         </form>
                     </div>
                 </div>
@@ -147,15 +155,38 @@
         </div>
     </section>
 
-    <!-- Social Proof -->
-    <section class="py-12 border-t border-gray-100">
-        <div class="container mx-auto px-4 text-center">
-            <h4 class="text-sm font-bold text-gray-400 uppercase tracking-widest mb-8">Ils nous font confiance dans le 63</h4>
-            <div class="flex flex-wrap justify-center items-center gap-8 opacity-50 grayscale">
-                <img src="https://upload.wikimedia.org/wikipedia/fr/0/05/Logo_Puy-de-D%C3%B4me_2015.svg" alt="Puy-de-Dome" class="h-10">
-                <span class="text-2xl font-bold text-gray-400">Expert-Alu</span>
-                <span class="text-2xl font-bold text-gray-400">BricoDôme</span>
-                <span class="text-2xl font-bold text-gray-400">Clermont-Bat</span>
+    <!-- Reassurance Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h3 class="text-center text-sm font-bold text-gray-400 uppercase tracking-widest mb-12">Matériel certifié & Partenaires locaux</h3>
+            <div class="flex flex-wrap justify-center items-center gap-12 md:gap-20 opacity-60">
+                <!-- Industry logos -->
+                <img src="https://www.somfy.fr/common/img/logos/logo-somfy.svg" alt="Somfy" class="h-8 md:h-12">
+                <img src="https://www.came.com/themes/custom/came/logo.svg" alt="Came" class="h-8 md:h-12 bg-gray-800 p-2 rounded">
+                <img src="https://www.niceforyou.com/sites/default/files/logo_nice_new.png" alt="Nice" class="h-8 md:h-12">
+                <!-- Local reference symbol -->
+                <div class="flex items-center space-x-2">
+                    <img src="https://upload.wikimedia.org/wikipedia/fr/0/05/Logo_Puy-de-D%C3%B4me_2015.svg" alt="Puy-de-Dome" class="h-12">
+                    <span class="font-bold text-gray-400">Artisans 63</span>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 mt-16 max-w-5xl mx-auto">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <i class="fas fa-shield-alt text-63 text-3xl mb-4"></i>
+                    <h4 class="font-bold mb-2">Sécurité Garantie</h4>
+                    <p class="text-gray-500 text-sm">Installation aux normes NF pour une sécurité maximale de votre foyer.</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <i class="fas fa-map-marker-alt text-63 text-3xl mb-4"></i>
+                    <h4 class="font-bold mb-2">Proximité Réelle</h4>
+                    <p class="text-gray-500 text-sm">Un seul interlocuteur dans le Puy-de-Dôme pour un suivi personnalisé.</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <i class="fas fa-tools text-63 text-3xl mb-4"></i>
+                    <h4 class="font-bold mb-2">SAV Réactif</h4>
+                    <p class="text-gray-500 text-sm">Intervention sous 48h en cas de panne sur votre automatisme.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -167,77 +198,83 @@
                 <i class="fas fa-bolt text-blue-400 text-2xl"></i>
                 <span class="text-xl font-bold">Moto<span class="text-blue-400">63</span></span>
             </div>
-            <p class="text-gray-400 max-w-md mx-auto mb-8">Le réseau n°1 de mise en relation pour la motorisation intelligente dans le Puy-de-Dôme.</p>
-            <div class="text-sm text-gray-500">© 2026 Moto63 - Service de mise en relation exclusif</div>
+            <p class="text-gray-400 max-w-md mx-auto mb-8">Spécialiste de la motorisation intelligente et de l'accès sécurisé dans le Puy-de-Dôme (63).</p>
+            <div class="text-sm text-gray-500">© 2026 Moto63 - Service de mise en relation exclusive qualifiée</div>
         </div>
     </footer>
 
     <script>
         let selections = {
             type: '',
+            situation: 'existant',
             mechanism: '',
-            option: ''
+            dimension: '',
+            option: '',
+            price_min: 0,
+            price_max: 0
         };
 
-        function nextStep(step, val) {
-            if (step === 2) {
-                selections.type = val;
+        function setSelection(key, val, next) {
+            selections[key] = val;
+            if (key === 'type') {
                 const container = document.getElementById('mechanism-options');
                 container.innerHTML = '';
-                
                 if (val === 'portail') {
                     container.innerHTML = `
-                        <button onclick="nextStep(3, 'battant')" class="p-4 border border-gray-200 rounded-xl hover:bg-gray-50 text-left">Portail Battant (2 vantaux)</button>
-                        <button onclick="nextStep(3, 'coulissant')" class="p-4 border border-gray-200 rounded-xl hover:bg-gray-50 text-left">Portail Coulissant</button>
+                        <button onclick="setSelection('mechanism', 'battant', 3)" class="p-4 border border-gray-200 rounded-xl hover:bg-gray-50 text-left">Portail Battant (2 vantaux)</button>
+                        <button onclick="setSelection('mechanism', 'coulissant', 3)" class="p-4 border border-gray-200 rounded-xl hover:bg-gray-50 text-left">Portail Coulissant</button>
                     `;
                 } else {
                     container.innerHTML = `
-                        <button onclick="nextStep(3, 'sectionnelle')" class="p-4 border border-gray-200 rounded-xl hover:bg-gray-50 text-left">Porte Sectionnelle / Basculante</button>
-                        <button onclick="nextStep(3, 'enroulable')" class="p-4 border border-gray-200 rounded-xl hover:bg-gray-50 text-left">Porte Enroulable</button>
+                        <button onclick="setSelection('mechanism', 'sectionnelle', 3)" class="p-4 border border-gray-200 rounded-xl hover:bg-gray-50 text-left">Porte Sectionnelle / Basculante</button>
+                        <button onclick="setSelection('mechanism', 'enroulable', 3)" class="p-4 border border-gray-200 rounded-xl hover:bg-gray-50 text-left">Porte Enroulable</button>
                     `;
                 }
             }
-            if (step === 3) {
-                selections.mechanism = val;
-            }
+            goToStep(next);
+        }
 
+        function goToStep(step) {
             document.querySelectorAll('.step').forEach(s => s.classList.add('step-hidden'));
             document.getElementById('step-' + step).classList.remove('step-hidden');
         }
 
         function prevStep(step) {
-            document.querySelectorAll('.step').forEach(s => s.classList.add('step-hidden'));
-            document.getElementById('step-' + step).classList.remove('step-hidden');
+            goToStep(step);
         }
 
         function calculateResult(option) {
             selections.option = option;
-            let base = 500;
-            if (selections.type === 'portail') base += 300;
-            if (option === 'connected') base += 250;
-            if (option === 'solar') base += 450;
+            selections.dimension = document.getElementById('dimension_input').value || "Standard";
             
-            const min = Math.round(base * 0.9);
-            const max = Math.round(base * 1.3);
+            let base = selections.type === 'portail' ? 850 : 550;
+            if (option === 'connected') base += 280;
+            if (option === 'solar') base += 520;
+            if (parseFloat(selections.dimension) > 4) base += 200;
             
-            document.getElementById('price-range').innerText = min + ' - ' + max;
+            selections.price_min = Math.round(base * 0.85);
+            selections.price_max = Math.round(base * 1.25);
             
-            document.querySelectorAll('.step').forEach(s => s.classList.add('step-hidden'));
-            document.getElementById('step-result').classList.remove('step-hidden');
+            document.getElementById('price-range').innerText = selections.price_min + ' - ' + selections.price_max;
+            goToStep('result');
         }
 
         document.getElementById('lead-form').addEventListener('submit', function(e) {
             e.preventDefault();
             const data = {
+                date: new Date().toISOString(),
+                last_name: document.getElementById('last_name').value,
                 first_name: document.getElementById('first_name').value,
                 phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                zip_code: document.getElementById('zip_code').value,
                 timeline: document.getElementById('timeline').value,
+                notes: document.getElementById('notes').value,
                 project: selections
             };
             
-            // Simulation de succès
-            alert("Merci " + data.first_name + " ! Votre estimation est enregistrée. Un artisan spécialisé du 63 vous contactera sous 24h.");
-            console.log("Données à envoyer au Webhook Make.com :", data);
+            alert("Merci " + data.first_name + " ! Votre dossier est transmis à notre expert du secteur " + data.zip_code + ". Vous serez contacté sous 24h.");
+            console.log("Payload pour Make.com :", data);
         });
     </script>
 </body>
