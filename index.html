@@ -65,7 +65,7 @@
                             </button>
                             <button onclick="setSelection('type', 'garage', 2)" class="p-6 border-2 border-gray-100 rounded-2xl hover:border-63 hover:bg-blue-50 transition group">
                                 <i class="fas fa-warehouse text-3xl mb-3 text-gray-400 group-hover:text-63"></i>
-                                <span class="block font-bold">Une Porte de Garage</span>
+                                <span class="block font-bold">Porte de Garage</span>
                             </button>
                         </div>
                         <h4 class="font-semibold mb-3">Situation actuelle :</h4>
@@ -147,7 +147,7 @@
                             
                             <textarea id="notes" placeholder="Précisez votre besoin (ex: marque actuelle, contraintes particulières...)" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg h-24 outline-none focus:ring-2 focus:ring-63"></textarea>
 
-                            <button type="submit" class="w-full bg-63 text-white py-4 rounded-xl font-bold text-lg hover:bg-blue-800 shadow-lg transition">Demander mon étude gratuite</button>
+                            <button type="submit" id="submit-btn" class="w-full bg-63 text-white py-4 rounded-xl font-bold text-lg hover:bg-blue-800 shadow-lg transition disabled:opacity-50">Demander mon étude gratuite</button>
                         </form>
                     </div>
                 </div>
@@ -160,32 +160,12 @@
         <div class="container mx-auto px-4">
             <h3 class="text-center text-sm font-bold text-gray-400 uppercase tracking-widest mb-12">Matériel certifié & Partenaires locaux</h3>
             <div class="flex flex-wrap justify-center items-center gap-12 md:gap-20 opacity-60">
-                <!-- Industry logos -->
                 <img src="https://www.somfy.fr/common/img/logos/logo-somfy.svg" alt="Somfy" class="h-8 md:h-12">
                 <img src="https://www.came.com/themes/custom/came/logo.svg" alt="Came" class="h-8 md:h-12 bg-gray-800 p-2 rounded">
                 <img src="https://www.niceforyou.com/sites/default/files/logo_nice_new.png" alt="Nice" class="h-8 md:h-12">
-                <!-- Local reference symbol -->
                 <div class="flex items-center space-x-2">
                     <img src="https://upload.wikimedia.org/wikipedia/fr/0/05/Logo_Puy-de-D%C3%B4me_2015.svg" alt="Puy-de-Dome" class="h-12">
                     <span class="font-bold text-gray-400">Artisans 63</span>
-                </div>
-            </div>
-            
-            <div class="grid md:grid-cols-3 gap-8 mt-16 max-w-5xl mx-auto">
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                    <i class="fas fa-shield-alt text-63 text-3xl mb-4"></i>
-                    <h4 class="font-bold mb-2">Sécurité Garantie</h4>
-                    <p class="text-gray-500 text-sm">Installation aux normes NF pour une sécurité maximale de votre foyer.</p>
-                </div>
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                    <i class="fas fa-map-marker-alt text-63 text-3xl mb-4"></i>
-                    <h4 class="font-bold mb-2">Proximité Réelle</h4>
-                    <p class="text-gray-500 text-sm">Un seul interlocuteur dans le Puy-de-Dôme pour un suivi personnalisé.</p>
-                </div>
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                    <i class="fas fa-tools text-63 text-3xl mb-4"></i>
-                    <h4 class="font-bold mb-2">SAV Réactif</h4>
-                    <p class="text-gray-500 text-sm">Intervention sous 48h en cas de panne sur votre automatisme.</p>
                 </div>
             </div>
         </div>
@@ -198,12 +178,14 @@
                 <i class="fas fa-bolt text-blue-400 text-2xl"></i>
                 <span class="text-xl font-bold">Moto<span class="text-blue-400">63</span></span>
             </div>
-            <p class="text-gray-400 max-w-md mx-auto mb-8">Spécialiste de la motorisation intelligente et de l'accès sécurisé dans le Puy-de-Dôme (63).</p>
+            <p class="text-gray-400 max-w-md mx-auto mb-8">Spécialiste de la motorisation intelligente dans le Puy-de-Dôme (63).</p>
             <div class="text-sm text-gray-500">© 2026 Moto63 - Service de mise en relation exclusive qualifiée</div>
         </div>
     </footer>
 
     <script>
+        const WEBHOOK_URL = "VOTRE_URL_WEBHOOK_ICI"; // Remplacez par votre URL Make.com
+
         let selections = {
             type: '',
             situation: 'existant',
@@ -221,7 +203,7 @@
                 container.innerHTML = '';
                 if (val === 'portail') {
                     container.innerHTML = `
-                        <button onclick="setSelection('mechanism', 'battant', 3)" class="p-4 border border-gray-200 rounded-xl hover:bg-gray-50 text-left">Portail Battant (2 vantaux)</button>
+                        <button onclick="setSelection('mechanism', 'battant', 3)" class="p-4 border border-gray-200 rounded-xl hover:bg-gray-50 text-left">Portail Battant</button>
                         <button onclick="setSelection('mechanism', 'coulissant', 3)" class="p-4 border border-gray-200 rounded-xl hover:bg-gray-50 text-left">Portail Coulissant</button>
                     `;
                 } else {
@@ -246,35 +228,53 @@
         function calculateResult(option) {
             selections.option = option;
             selections.dimension = document.getElementById('dimension_input').value || "Standard";
-            
             let base = selections.type === 'portail' ? 850 : 550;
             if (option === 'connected') base += 280;
             if (option === 'solar') base += 520;
-            if (parseFloat(selections.dimension) > 4) base += 200;
-            
             selections.price_min = Math.round(base * 0.85);
             selections.price_max = Math.round(base * 1.25);
-            
             document.getElementById('price-range').innerText = selections.price_min + ' - ' + selections.price_max;
             goToStep('result');
         }
 
-        document.getElementById('lead-form').addEventListener('submit', function(e) {
+        document.getElementById('lead-form').addEventListener('submit', async function(e) {
             e.preventDefault();
-            const data = {
-                date: new Date().toISOString(),
-                last_name: document.getElementById('last_name').value,
-                first_name: document.getElementById('first_name').value,
-                phone: document.getElementById('phone').value,
-                email: document.getElementById('email').value,
-                zip_code: document.getElementById('zip_code').value,
-                timeline: document.getElementById('timeline').value,
-                notes: document.getElementById('notes').value,
-                project: selections
+            const btn = document.getElementById('submit-btn');
+            btn.disabled = true;
+            btn.innerText = "Envoi en cours...";
+
+            const payload = {
+                Date: new Date().toLocaleDateString('fr-FR'),
+                Nom: document.getElementById('last_name').value,
+                Prenom: document.getElementById('first_name').value,
+                Telephone: document.getElementById('phone').value,
+                Email: document.getElementById('email').value,
+                ZipCode: document.getElementById('zip_code').value,
+                TypeProjet: selections.type + " " + selections.mechanism,
+                Budget: selections.price_min + "€ - " + selections.price_max + "€",
+                Delai: document.getElementById('timeline').value,
+                Situation: selections.situation,
+                Dimension: selections.dimension + "m",
+                Notes: document.getElementById('notes').value,
+                Source: "Landing Page Motorisation 63",
+                Statut: "Nouveau"
             };
-            
-            alert("Merci " + data.first_name + " ! Votre dossier est transmis à notre expert du secteur " + data.zip_code + ". Vous serez contacté sous 24h.");
-            console.log("Payload pour Make.com :", data);
+
+            try {
+                if (WEBHOOK_URL !== "VOTRE_URL_WEBHOOK_ICI") {
+                    await fetch(WEBHOOK_URL, {
+                        method: 'POST',
+                        body: JSON.stringify(payload),
+                        headers: { 'Content-Type': 'application/json' }
+                    });
+                }
+                alert("Merci " + payload.Prenom + " ! Votre demande a été transmise.");
+                window.location.reload();
+            } catch (err) {
+                alert("Une erreur est survenue. Veuillez réessayer.");
+                btn.disabled = false;
+                btn.innerText = "Demander mon étude gratuite";
+            }
         });
     </script>
 </body>
