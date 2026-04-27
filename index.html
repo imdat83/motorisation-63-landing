@@ -11,6 +11,7 @@
         .bg-63 { background-color: #1e3a8a; }
         .text-63 { color: #1e3a8a; }
         .border-63 { border-color: #1e3a8a; }
+        .honeypot { display: none !important; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans">
@@ -59,12 +60,12 @@
                     <div id="step-1" class="step">
                         <h3 class="text-xl font-bold mb-6 text-center">Quel est votre projet ?</h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                            <button onclick="setSelection('type', 'portail', 2)" class="p-6 border-2 border-gray-100 rounded-2xl hover:border-63 hover:bg-blue-50 transition group">
-                                <i class="fas fa-gate text-3xl mb-3 text-gray-400 group-hover:text-63">
+                            <button onclick="setSelection('type', 'portail', 2)" class="p-6 border-2 border-gray-100 rounded-2xl hover:border-63 hover:bg-blue-50 transition group text-center">
+                                <i class="fas fa-gate text-3xl mb-3 text-gray-400 group-hover:text-63"></i>
                                 <span class="block font-bold">Portail</span>
                             </button>
-                            <button onclick="setSelection('type', 'garage', 2)" class="p-6 border-2 border-gray-100 rounded-2xl hover:border-63 hover:bg-blue-50 transition group">
-                                <i class="fas fa-warehouse text-3xl mb-3 text-gray-400 group-hover:text-63">
+                            <button onclick="setSelection('type', 'garage', 2)" class="p-6 border-2 border-gray-100 rounded-2xl hover:border-63 hover:bg-blue-50 transition group text-center">
+                                <i class="fas fa-warehouse text-3xl mb-3 text-gray-400 group-hover:text-63"></i>
                                 <span class="block font-bold">Une Porte de Garage</span>
                             </button>
                         </div>
@@ -102,15 +103,15 @@
                     <div id="step-3" class="step step-hidden">
                         <h3 class="text-xl font-bold mb-6 text-center">Niveau de confort</h3>
                         <div class="grid grid-cols-1 gap-4">
-                            <button onclick="calculateResult('standard')" class="p-4 border border-gray-200 rounded-xl hover:bg-gray-50 flex items-center justify-between">
+                            <button onclick="calculateResult('standard')" class="p-4 border border-gray-200 rounded-xl hover:bg-gray-50 flex items-center justify-between text-left">
                                 <span>Standard (Télécommande)</span>
                                 <i class="fas fa-chevron-right text-gray-300"></i>
                             </button>
-                            <button onclick="calculateResult('connected')" class="p-4 border border-gray-200 rounded-xl hover:bg-gray-50 flex items-center justify-between">
+                            <button onclick="calculateResult('connected')" class="p-4 border border-gray-200 rounded-xl hover:bg-gray-50 flex items-center justify-between text-left">
                                 <span>Connecté (Smartphone / Domotique)</span>
                                 <i class="fas fa-chevron-right text-gray-300"></i>
                             </button>
-                            <button onclick="calculateResult('solar')" class="p-4 border border-gray-200 rounded-xl hover:bg-gray-50 flex items-center justify-between">
+                            <button onclick="calculateResult('solar')" class="p-4 border border-gray-200 rounded-xl hover:bg-gray-50 flex items-center justify-between text-left">
                                 <span>Autonome Solaire (Eco)</span>
                                 <i class="fas fa-chevron-right text-gray-300"></i>
                             </button>
@@ -131,6 +132,11 @@
                         </div>
 
                         <form id="lead-form" class="space-y-4">
+                            <!-- Honeypot field for security -->
+                            <div class="honeypot">
+                                <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                            </div>
+
                             <div class="grid grid-cols-2 gap-4">
                                 <input type="text" id="last_name" placeholder="Nom" required class="p-3 bg-gray-50 border border-gray-200 rounded-lg outline-none focus:ring-2 focus:ring-63">
                                 <input type="text" id="first_name" placeholder="Prénom" required class="p-3 bg-gray-50 border border-gray-200 rounded-lg outline-none focus:ring-2 focus:ring-63">
@@ -161,9 +167,9 @@
     <section class="py-16 bg-gray-50">
         <div class="container mx-auto px-4">
             <h3 class="text-center text-sm font-bold text-gray-400 uppercase tracking-widest mb-12">Matériel certifié & Partenaires locaux</h3>
-            <div class="flex flex-wrap justify-center items-center gap-12 md:gap-20 opacity-60">
+            <div class="flex flex-wrap justify-center items-center gap-12 md:gap-20 opacity-60 text-center">
                 <img src="https://www.somfy.fr/common/img/logos/logo-somfy.svg" alt="Somfy" class="h-8 md:h-12">
-                <img src="https://www.came.com/themes/custom/came/logo.svg" alt="Came" class="h-8 md:h-12 bg-gray-800 p-2 rounded">
+                <div class="bg-gray-800 p-2 rounded inline-block"><img src="https://www.came.com/themes/custom/came/logo.svg" alt="Came" class="h-8 md:h-12"></div>
                 <img src="https://www.niceforyou.com/sites/default/files/logo_nice_new.png" alt="Nice" class="h-8 md:h-12">
                 <div class="flex items-center space-x-2">
                     <img src="https://upload.wikimedia.org/wikipedia/fr/0/05/Logo_Puy-de-D%C3%B4me_2015.svg" alt="Puy-de-Dome" class="h-12">
@@ -215,13 +221,25 @@
                 container.innerHTML = '';
                 if (val === 'portail') {
                     container.innerHTML = `
-                        <button onclick="setSelection('mechanism', 'battant', 3)" class="p-4 border border-gray-200 rounded-xl hover:bg-gray-50 text-left">Portail Battant</button>
-                        <button onclick="setSelection('mechanism', 'coulissant', 3)" class="p-4 border border-gray-200 rounded-xl hover:bg-gray-50 text-left">Portail Coulissant</button>
+                        <button onclick="setSelection('mechanism', 'battant', 3)" class="p-4 border border-gray-200 rounded-xl hover:bg-gray-50 text-left w-full flex justify-between items-center">
+                            <span>Portail Battant</span>
+                            <i class="fas fa-chevron-right text-gray-300"></i>
+                        </button>
+                        <button onclick="setSelection('mechanism', 'coulissant', 3)" class="p-4 border border-gray-200 rounded-xl hover:bg-gray-50 text-left w-full flex justify-between items-center">
+                            <span>Portail Coulissant</span>
+                            <i class="fas fa-chevron-right text-gray-300"></i>
+                        </button>
                     `;
                 } else {
                     container.innerHTML = `
-                        <button onclick="setSelection('mechanism', 'sectionnelle', 3)" class="p-4 border border-gray-200 rounded-xl hover:bg-gray-50 text-left">Porte Sectionnelle / Basculante</button>
-                        <button onclick="setSelection('mechanism', 'enroulable', 3)" class="p-4 border border-gray-200 rounded-xl hover:bg-gray-50 text-left">Porte Enroulable</button>
+                        <button onclick="setSelection('mechanism', 'sectionnelle', 3)" class="p-4 border border-gray-200 rounded-xl hover:bg-gray-50 text-left w-full flex justify-between items-center">
+                            <span>Porte Sectionnelle / Basculante</span>
+                            <i class="fas fa-chevron-right text-gray-300"></i>
+                        </button>
+                        <button onclick="setSelection('mechanism', 'enroulable', 3)" class="p-4 border border-gray-200 rounded-xl hover:bg-gray-50 text-left w-full flex justify-between items-center">
+                            <span>Porte Enroulable</span>
+                            <i class="fas fa-chevron-right text-gray-300"></i>
+                        </button>
                     `;
                 }
             }
@@ -239,19 +257,13 @@
 
         function calculateResult(option) {
             selections.option = option;
-            
-            // Base price: Portail 850€, Garage 550€
             let basePrice = selections.type === 'portail' ? 850 : 550;
-            
-            // Apply dimension coefficient: +20% (0.2) for every 0.5m
-            // Base dimension reference at 3m
             const baseDim = 3.0;
             const diff = selections.dimension - baseDim;
             if (diff > 0) {
                 const nbSlices = diff / 0.5;
                 basePrice = basePrice * (1 + (nbSlices * 0.2));
             }
-
             if (option === 'connected') basePrice += 280;
             if (option === 'solar') basePrice += 520;
 
@@ -264,6 +276,13 @@
 
         document.getElementById('lead-form').addEventListener('submit', async function(e) {
             e.preventDefault();
+            
+            // Security: Honeypot check
+            if (document.getElementById('website').value !== "") {
+                console.log("Bot detected");
+                return;
+            }
+
             const btn = document.getElementById('submit-btn');
             btn.disabled = true;
             btn.innerText = "Envoi en cours...";
