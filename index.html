@@ -269,7 +269,7 @@
             if (option === 'connected') basePrice += 280;
             if (option === 'solar') basePrice += 520;
 
-            selections.price_min = Math.round(basePrice * 0.85);
+            selections.price_min = Math.round(basePrice * 0.55);
             selections.price_max = Math.round(basePrice * 1.25);
             
             document.getElementById('price-range').innerText = selections.price_min + ' - ' + selections.price_max;
